@@ -1,8 +1,11 @@
-import { Button } from '@repo/ui/button';
+import type { Houses } from '@repo/validators/houses';
 import { getBaseApiUrl } from '../utils/api';
+import { Suspense } from 'react';
+import Loading from './loading';
+import HouseCard from '../components/HouseCard';
 
-const getTestResponse = async () => {
-  const reqUrl = `${getBaseApiUrl()}/test`;
+const getHouses = async () => {
+  const reqUrl = `${getBaseApiUrl()}/houses`;
   const res = await fetch(reqUrl, { cache: 'no-cache' });
 
   if (!res.ok) {
@@ -13,16 +16,15 @@ const getTestResponse = async () => {
 };
 
 const Page = async () => {
-  const res = await getTestResponse();
-  const data = JSON.stringify(res);
+  const res = (await getHouses()) as Houses;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center space-y-8 p-24">
-      <div>Hello world!</div>
-      <div>
-        From backend: <span>{data}</span>
-      </div>
-      <Button disabled>Button</Button>
+      <Suspense fallback={<Loading />}>
+        {res.map((house) => {
+          return <HouseCard key={house.id} house={house} />;
+        })}
+      </Suspense>
     </main>
   );
 };
