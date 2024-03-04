@@ -1,0 +1,19 @@
+node_modules/
+.vercel/
+.next/
+target/
+build/
+dist/
+
+coverage/
+snapshot/
+generated/
+pnpm-lock.yaml
+
+__generated__/
+
+.DS_Store
+.husky
+
+# generators
+*.hbs

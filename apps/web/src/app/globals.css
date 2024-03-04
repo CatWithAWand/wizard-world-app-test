@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .tap-highlight-transparent {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer base {
+  body {
+    @apply m-0 max-w-[100vw] bg-gray-50 font-body text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200;
+  }
+
+  body * {
+    @apply tap-highlight-transparent antialiased outline-none focus:outline-none;
+  }
+
+  img {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -ms-transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    filter: none;
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+    will-change: transform;
+  }
+}
