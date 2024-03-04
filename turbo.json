@@ -4,7 +4,7 @@
   "globalPassThroughEnv": ["NODE_ENV", "PORT"],
   "pipeline": {
     "build": {
-      "env": ["HOST", "PORT"],
+      "env": ["HOST", "PORT", "RENDER", "RENDER_INTERNAL_HOSTNAME"],
       "dependsOn": ["^build"],
       "outputs": ["dist/**/*"]
     },
@@ -12,8 +12,6 @@
       "env": [
         "VERCEL",
         "VERCEL_URL",
-        "RENDER",
-        "RENDER_INTERNAL_HOSTNAME",
         "NEXT_PUBLIC_API_URL",
         "NEXT_PUBLIC_PORT"
       ],
