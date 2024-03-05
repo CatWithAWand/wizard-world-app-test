@@ -10,7 +10,7 @@
 
 @layer base {
   body {
-    @apply m-0 max-w-[100vw] bg-gray-50 font-body text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200;
+    @apply m-0 max-w-[100vw] bg-gray-50 font-body text-black;
   }
 
   body * {

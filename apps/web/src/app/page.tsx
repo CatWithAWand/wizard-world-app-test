@@ -1,30 +1,27 @@
-import { Button } from '@repo/ui/button';
-import { getBaseApiUrl } from '../utils/api';
+import { Suspense } from 'react';
+import Search from '../components/Search';
+import CardGrid, { CardGridSkeleton } from '../components/CardGrid';
 
-const getTestResponse = async () => {
-  const reqUrl = `${getBaseApiUrl()}/test`;
-  const res = await fetch(reqUrl, { cache: 'no-cache' });
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
-  }
-
-  return res.json();
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-const Page = async () => {
-  const res = await getTestResponse();
-  const data = JSON.stringify(res);
+const HousesPage = async ({ searchParams }: Props) => {
+  const name = typeof searchParams.name === 'string' ? searchParams.name : '';
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center space-y-8 p-24">
-      <div>Hello world!</div>
-      <div>
-        From backend: <span>{data}</span>
+    <main className="flex min-h-screen flex-col items-center justify-start px-4 pt-16 sm:px-24 sm:pt-24">
+      <h2 className="mb-20 text-2xl font-black">Wizard Houses</h2>
+
+      <div className="mb-8 flex w-full items-center justify-center">
+        <Search />
       </div>
-      <Button disabled>Button</Button>
+
+      <Suspense fallback={<CardGridSkeleton number={8} />}>
+        <CardGrid name={name} />
+      </Suspense>
     </main>
   );
 };
 
-export default Page;
+export default HousesPage;
