@@ -27,6 +27,10 @@ export const houseSchema = Type.Object({
 
 export const housesSchema = Type.Array(houseSchema);
 
+export const queryStringSchema = Type.Object({
+  name: Type.Optional(Type.String()),
+});
+
 // Static data types
 export type House = Static<typeof houseSchema>;
 export type Houses = Static<typeof housesSchema>;

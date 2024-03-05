@@ -1,9 +1,12 @@
+import type { HTMLAttributes } from 'react';
 import type { House } from '@repo/validators/houses';
 import colors from 'color-name';
+import { Skeleton } from '@repo/ui/skeleton';
+import { cn } from '@repo/ui/utils';
 
 type HouseCardProps = {
   house: House;
-};
+} & HTMLAttributes<HTMLDivElement>;
 
 const parseColours = (colours: string) => {
   const colourArr = colours
@@ -18,14 +21,17 @@ const parseColours = (colours: string) => {
   return colourArr;
 };
 
-const HouseCard = ({ house }: HouseCardProps) => {
+const HouseCard = ({ house, className }: HouseCardProps) => {
   const { name, animal, founder, houseColours } = house;
   const colours = parseColours(houseColours);
 
   return (
     <div
-      className={`flex w-80 flex-col items-center justify-center rounded-lg border-[1px] border-neutral-200
-      bg-white px-3.5 py-4 shadow-md`}
+      className={cn(
+        `flex w-80 flex-col items-center justify-center rounded-lg border-[1px]
+      border-neutral-200 bg-white px-3.5 py-4 shadow-md`,
+        className,
+      )}
     >
       <div className="mb-3.5 flex w-full flex-row items-center justify-between">
         <div className="text-lg font-black leading-4">{name}</div>
@@ -33,7 +39,7 @@ const HouseCard = ({ house }: HouseCardProps) => {
       </div>
       <div
         style={{
-          background: `linear-gradient(90deg, ${colours[0]} 0%, ${colours[1]} 100%);`,
+          background: `linear-gradient(90deg, ${colours[0]} 0%, ${colours[1]} 100%)`,
         }}
         className="mb-[0.7rem] h-4 w-full rounded-[0.25rem]"
       ></div>
@@ -45,5 +51,9 @@ const HouseCard = ({ house }: HouseCardProps) => {
     </div>
   );
 };
+
+export const HouseCardSkeleton = () => (
+  <Skeleton className="h-24 w-80 rounded-lg" />
+);
 
 export default HouseCard;
