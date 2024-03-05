@@ -9,7 +9,7 @@ import fastify from 'fastify';
 import fastifyCompress from '@fastify/compress';
 import fastifyHelmet from '@fastify/helmet';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
-import testRoutes from './routes/test.js';
+import rootRoutes from './routes/root.js';
 import housesRoutes from './routes/houses.js';
 import env from './lib/env.js';
 
@@ -31,7 +31,7 @@ await app.register(fastifyHelmet, {
 
 await app.register(fastifyCompress);
 
-await app.register(testRoutes);
+await app.register(rootRoutes);
 await app.register(housesRoutes);
 
 const start = async () => {

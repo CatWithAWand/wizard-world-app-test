@@ -1,22 +1,23 @@
 import { Type } from '@sinclair/typebox';
 import type { FastifyTypebox } from '../index.js';
 
-const testRoutes = async (fastify: FastifyTypebox) => {
+const rootRoutes = async (fastify: FastifyTypebox) => {
   fastify.get(
-    '/test',
+    '/',
     {
       schema: {
         response: {
           200: Type.Object({
-            hello: Type.String(),
+            api: Type.String(),
+            version: Type.Number(),
           }),
         },
       },
     },
     async (_request, _reply) => {
-      return { hello: 'world' };
+      return { api: 'wizard-world-app-api', version: 1 };
     },
   );
 };
 
-export default testRoutes;
+export default rootRoutes;
